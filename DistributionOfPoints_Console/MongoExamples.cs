@@ -26,5 +26,29 @@ namespace DistributionOfPoints_Console
             var collection = database.GetCollection<Unit>("Units");
             collection.ReplaceOne(x => x.Name == name, unit);
         }
+
+        public static void ResetValues(string name)
+        {
+            if (name == "Warrior")
+            {
+                var WarriorDefaultValue = MongoExamples.Find("WarriorDefaultValue");
+                WarriorDefaultValue.Name = "Warrior";
+                MongoExamples.ReplaceByName("Warrior", WarriorDefaultValue);
+            }
+
+            else if (name == "Rogue")
+            {
+                var RogueDefaultValue = MongoExamples.Find("RogueDefaultValue");
+                RogueDefaultValue.Name = "Rogue";
+                MongoExamples.ReplaceByName("Rogue", RogueDefaultValue);
+            }
+
+            else if (name == "Wizard")
+            {
+                var WizardDefaultValue = MongoExamples.Find("WizardDefaultValue");
+                WizardDefaultValue.Name = "Wizard";
+                MongoExamples.ReplaceByName("Wizard", MongoExamples.Find("WizardDefaultValue"));
+            }
+        }
     }
 }

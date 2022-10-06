@@ -9,8 +9,8 @@ namespace DistributionOfPoints_Console
     {
         static void Main(string[] args)
         {
-            Unit warrior = new Unit(MongoExamples.Find("Warrior"));
-            warrior.ResetValues();
+            Unit warrior = MongoExamples.Find("Warrior");
+            MongoExamples.ResetValues(warrior.Name);
         }
     }
 }
