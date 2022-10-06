@@ -9,11 +9,8 @@ namespace DistributionOfPoints_Console
     {
         static void Main(string[] args)
         {
-            Warrior warrior = new Warrior();
-            Rogue rogue = new Rogue();
-            Wizard wizard = new Wizard();
-
-            MongoExamples.ReplaceByName("Wizard", wizard);
+            Unit warrior = new Unit(MongoExamples.Find("Warrior"));
+            warrior.ResetValues();
         }
     }
 }

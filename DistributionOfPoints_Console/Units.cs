@@ -25,27 +25,51 @@ namespace DistributionOfPoints_Console
         public int[] constitution;
         public int[] intelligence;
 
-    }
-
-    [BsonIgnoreExtraElements]
-    class Warrior : Unit
-    {
-        public Warrior()
+        public Unit(Unit document)
         {
-            Name = "Warrior";
-            maxHP = 260;
-            maxMP = 10;
-            PAttack = 165;
-            MAttack = 10;
-            PDef = 55;
+            Name = document.Name;
+            skillPoints = document.skillPoints;
+            maxHP = document.maxHP;
+            maxMP = document.maxMP;
+            PAttack = document.PAttack;
+            MAttack = document.MAttack;
+            PDef = document.PDef;
 
-            strength = new[] { 30, 30, 250 }; // minimum level; actual level; maximum level
-            dexterity = new[] { 15, 15, 70 };
-            constitution = new[] { 20, 20, 100 };
-            intelligence = new[] { 10, 10, 50 };
+            strength = document.strength; // minimum level; actual level; maximum level
+            dexterity = document.dexterity;
+            constitution = document.constitution;
+            intelligence = document.intelligence;
         }
 
-        public void ManagementStrength()
+        // ----------------------------------------------------------------------------------------------------------------------------------------------------
+
+        public void ResetValues()
+        {
+            if (Name == "Warrior")
+            {
+                var WarriorDefaultValue = MongoExamples.Find("WarriorDefaultValue");
+                WarriorDefaultValue.Name = "Warrior";
+                MongoExamples.ReplaceByName("Warrior", WarriorDefaultValue);
+            }
+
+            else if (Name == "Rogue")
+            {
+                var RogueDefaultValue = MongoExamples.Find("RogueDefaultValue");
+                RogueDefaultValue.Name = "Rogue";
+                MongoExamples.ReplaceByName("Rogue", RogueDefaultValue);
+            }
+
+            else if (Name == "Wizard")
+            {
+                var WizardDefaultValue = MongoExamples.Find("WizardDefaultValue");
+                WizardDefaultValue.Name = "Wizard";
+                MongoExamples.ReplaceByName("Wizard", MongoExamples.Find("WizardDefaultValue"));
+            }
+        }
+
+        // ----------------------------------------------------------------------------------------------------------------------------------------------------
+
+        public void ManagementStrengthWarrior()
         {
             if (strength[1] < strength[2] && skillPoints > 0) // checking the achievement of the limit of skill points and levels of characteristics
             {
@@ -57,7 +81,7 @@ namespace DistributionOfPoints_Console
             }
         }
 
-        public void ManagementDexterity()
+        public void ManagementDexterityWarrior()
         {
             if (dexterity[1] < dexterity[2] && skillPoints > 0)
             {
@@ -69,7 +93,7 @@ namespace DistributionOfPoints_Console
             }
         }
 
-        public void ManagementConstitution()
+        public void ManagementConstitutionWarrior()
         {
             if (constitution[1] < constitution[2] && skillPoints > 0)
             {
@@ -81,7 +105,7 @@ namespace DistributionOfPoints_Console
             }
         }
 
-        public void ManagementIntelligence()
+        public void ManagementIntelligenceWarrior()
         {
             if (intelligence[1] < intelligence[2] && skillPoints > 0)
             {
@@ -92,27 +116,10 @@ namespace DistributionOfPoints_Console
                 MAttack++;
             }
         }
-    }
 
-    [BsonIgnoreExtraElements]
-    class Rogue : Unit
-    {
-        public Rogue()
-        {
-            Name = "Rogue";
-            maxHP = 135;
-            maxMP = 22.5;
-            PAttack = 150;
-            MAttack = 30;
-            PDef = 45;
 
-            strength = new[] { 15, 15, 55 };
-            dexterity = new[] { 30, 30, 250 };
-            constitution = new[] { 20, 20, 80 };
-            intelligence = new[] { 15, 15, 70 };
-        }
 
-        public void ManagementStrength()
+        public void ManagementStrengthRogue()
         {
             if (strength[1] < strength[2] && skillPoints > 0)
             {
@@ -124,7 +131,7 @@ namespace DistributionOfPoints_Console
             }
         }
 
-        public void ManagementDexterity()
+        public void ManagementDexterityRogue()
         {
             if (dexterity[1] < dexterity[2] && skillPoints > 0)
             {
@@ -136,7 +143,7 @@ namespace DistributionOfPoints_Console
             }
         }
 
-        public void ManagementConstitution()
+        public void ManagementConstitutionRogue()
         {
             if (constitution[1] < constitution[2] && skillPoints > 0)
             {
@@ -147,7 +154,7 @@ namespace DistributionOfPoints_Console
             }
         }
 
-        public void ManagementIntelligence()
+        public void ManagementIntelligenceRogue()
         {
             if (intelligence[1] < intelligence[2] && skillPoints > 0)
             {
@@ -158,27 +165,10 @@ namespace DistributionOfPoints_Console
                 MAttack += 2;
             }
         }
-    }
 
-    [BsonIgnoreExtraElements]
-    class Wizard : Unit
-    {
-        public Wizard()
-        {
-            Name = "Wizard";
-            maxHP = 55;
-            maxMP = 70;
-            PAttack = 30;
-            MAttack = 175;
-            PDef = 25;
 
-            strength = new[] { 10, 10, 45 };
-            dexterity = new[] { 20, 20, 70 };
-            constitution = new[] { 15, 15, 60 };
-            intelligence = new[] { 35, 35, 250 };
-        }
 
-        public void ManagementStrength()
+        public void ManagementStrengthWizard()
         {
             if (strength[1] < strength[2] && skillPoints > 0)
             {
@@ -190,7 +180,7 @@ namespace DistributionOfPoints_Console
             }
         }
 
-        public void ManagementDexterity()
+        public void ManagementDexterityWizard()
         {
             if (dexterity[1] < dexterity[2] && skillPoints > 0)
             {
@@ -201,7 +191,7 @@ namespace DistributionOfPoints_Console
             }
         }
 
-        public void ManagementConstitution()
+        public void ManagementConstitutionWizard()
         {
             if (constitution[1] < constitution[2] && skillPoints > 0)
             {
@@ -213,7 +203,7 @@ namespace DistributionOfPoints_Console
             }
         }
 
-        public void ManagementIntelligence()
+        public void ManagementIntelligenceWizard()
         {
             if (intelligence[1] < intelligence[2] && skillPoints > 0)
             {
@@ -225,4 +215,225 @@ namespace DistributionOfPoints_Console
             }
         }
     }
+
+
+
+    //[BsonIgnoreExtraElements]
+    //class Unit
+    //{
+    //    // indicators
+    //    public string Name;
+    //    public int skillPoints = 100;
+    //    public double maxHP;
+    //    public double maxMP;
+    //    public double PAttack;
+    //    public double MAttack;
+    //    public double PDef;
+
+    //    // specifications
+    //    public int[] strength;
+    //    public int[] dexterity;
+    //    public int[] constitution;
+    //    public int[] intelligence;
+
+    //}
+
+    //[BsonIgnoreExtraElements]
+    //class Warrior : Unit
+    //{
+    //    public Warrior()
+    //    {
+    //        Name = "Warrior";
+    //        maxHP = 260;
+    //        maxMP = 10;
+    //        PAttack = 165;
+    //        MAttack = 10;
+    //        PDef = 55;
+
+    //        strength = new[] { 30, 30, 250 }; // minimum level; actual level; maximum level
+    //        dexterity = new[] { 15, 15, 70 };
+    //        constitution = new[] { 20, 20, 100 };
+    //        intelligence = new[] { 10, 10, 50 };
+    //    }
+
+    //    public void ManagementStrength()
+    //    {
+    //        if (strength[1] < strength[2] && skillPoints > 0) // checking the achievement of the limit of skill points and levels of characteristics
+    //        {
+    //            skillPoints--;
+    //            strength[1]++;
+
+    //            PAttack += 5;
+    //            maxHP += 2;
+    //        }
+    //    }
+
+    //    public void ManagementDexterity()
+    //    {
+    //        if (dexterity[1] < dexterity[2] && skillPoints > 0)
+    //        {
+    //            skillPoints--;
+    //            dexterity[1]++;
+
+    //            PAttack++;
+    //            PDef++;
+    //        }
+    //    }
+
+    //    public void ManagementConstitution()
+    //    {
+    //        if (constitution[1] < constitution[2] && skillPoints > 0)
+    //        {
+    //            skillPoints--;
+    //            constitution[1]++;
+
+    //            maxHP += 10;
+    //            PDef += 2;
+    //        }
+    //    }
+
+    //    public void ManagementIntelligence()
+    //    {
+    //        if (intelligence[1] < intelligence[2] && skillPoints > 0)
+    //        {
+    //            skillPoints--;
+    //            intelligence[1]++;
+
+    //            maxMP++;
+    //            MAttack++;
+    //        }
+    //    }
+    //}
+
+    //[BsonIgnoreExtraElements]
+    //class Rogue : Unit
+    //{
+    //    public Rogue()
+    //    {
+    //        Name = "Rogue";
+    //        maxHP = 135;
+    //        maxMP = 22.5;
+    //        PAttack = 150;
+    //        MAttack = 30;
+    //        PDef = 45;
+
+    //        strength = new[] { 15, 15, 55 };
+    //        dexterity = new[] { 30, 30, 250 };
+    //        constitution = new[] { 20, 20, 80 };
+    //        intelligence = new[] { 15, 15, 70 };
+    //    }
+
+    //    public void ManagementStrength()
+    //    {
+    //        if (strength[1] < strength[2] && skillPoints > 0)
+    //        {
+    //            skillPoints--;
+    //            strength[1]++;
+
+    //            PAttack += 2;
+    //            maxHP++;
+    //        }
+    //    }
+
+    //    public void ManagementDexterity()
+    //    {
+    //        if (dexterity[1] < dexterity[2] && skillPoints > 0)
+    //        {
+    //            skillPoints--;
+    //            dexterity[1]++;
+
+    //            PAttack += 4;
+    //            PDef += 1.5;
+    //        }
+    //    }
+
+    //    public void ManagementConstitution()
+    //    {
+    //        if (constitution[1] < constitution[2] && skillPoints > 0)
+    //        {
+    //            skillPoints--;
+    //            constitution[1]++;
+
+    //            maxHP += 6;
+    //        }
+    //    }
+
+    //    public void ManagementIntelligence()
+    //    {
+    //        if (intelligence[1] < intelligence[2] && skillPoints > 0)
+    //        {
+    //            skillPoints--;
+    //            intelligence[1]++;
+
+    //            maxMP += 1.5;
+    //            MAttack += 2;
+    //        }
+    //    }
+    //}
+
+    //[BsonIgnoreExtraElements]
+    //class Wizard : Unit
+    //{
+    //    public Wizard()
+    //    {
+    //        Name = "Wizard";
+    //        maxHP = 55;
+    //        maxMP = 70;
+    //        PAttack = 30;
+    //        MAttack = 175;
+    //        PDef = 25;
+
+    //        strength = new[] { 10, 10, 45 };
+    //        dexterity = new[] { 20, 20, 70 };
+    //        constitution = new[] { 15, 15, 60 };
+    //        intelligence = new[] { 35, 35, 250 };
+    //    }
+
+    //    public void ManagementStrength()
+    //    {
+    //        if (strength[1] < strength[2] && skillPoints > 0)
+    //        {
+    //            skillPoints--;
+    //            strength[1]++;
+
+    //            PAttack += 3;
+    //            maxHP++;
+    //        }
+    //    }
+
+    //    public void ManagementDexterity()
+    //    {
+    //        if (dexterity[1] < dexterity[2] && skillPoints > 0)
+    //        {
+    //            skillPoints--;
+    //            dexterity[1]++;
+
+    //            PDef += 0.5;
+    //        }
+    //    }
+
+    //    public void ManagementConstitution()
+    //    {
+    //        if (constitution[1] < constitution[2] && skillPoints > 0)
+    //        {
+    //            skillPoints--;
+    //            constitution[1]++;
+
+    //            maxHP += 3;
+    //            PDef++;
+    //        }
+    //    }
+
+    //    public void ManagementIntelligence()
+    //    {
+    //        if (intelligence[1] < intelligence[2] && skillPoints > 0)
+    //        {
+    //            skillPoints--;
+    //            intelligence[1]++;
+
+    //            maxMP += 2;
+    //            MAttack += 5;
+    //        }
+    //    }
+    //}
 }
