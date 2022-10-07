@@ -6,19 +6,19 @@ namespace DistributionOfPoints_Console
 {
     interface IUnit
     {
-        void ManagementStrengthWarrior();
-        void ManagementDexterityWarrior();
-        void ManagementConstitutionWarrior();
-        void ManagementIntelligenceWarrior();
+        void ManagementStrengthWarrior(char sign);
+        void ManagementDexterityWarrior(char sign);
+        void ManagementConstitutionWarrior(char sign);
+        void ManagementIntelligenceWarrior(char sign);
 
-        void ManagementStrengthRogue();
-        void ManagementDexterityRogue();
-        void ManagementConstitutionRogue();
-        void ManagementIntelligenceRogue();
+        void ManagementStrengthRogue(char sign);
+        void ManagementDexterityRogue(char sign);
+        void ManagementConstitutionRogue(char sign);
+        void ManagementIntelligenceRogue(char sign);
 
-        void ManagementStrengthWizard();
-        void ManagementDexterityWizard();
-        void ManagementConstitutionWizard();
-        void ManagementIntelligenceWizard();
+        void ManagementStrengthWizard(char sign);
+        void ManagementDexterityWizard(char sign);
+        void ManagementConstitutionWizard(char sign);
+        void ManagementIntelligenceWizard(char sign);
     }
 }
