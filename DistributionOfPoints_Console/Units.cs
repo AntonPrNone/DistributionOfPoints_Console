@@ -8,7 +8,7 @@ using System.Text;
 namespace DistributionOfPoints_Console
 {
     [BsonIgnoreExtraElements]
-    class Unit : IUnit
+    public class Unit : IUnit
     {
         // indicators
         public string Name { get; internal set; }
