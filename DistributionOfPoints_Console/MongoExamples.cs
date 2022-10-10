@@ -25,9 +25,9 @@ namespace DistributionOfPoints_Console
 
         public static void ResetValues(string name)
         {
-            var DefaultValue = MongoExamples.Find(name + "DefaultValue");
+            Unit DefaultValue = Find(name + "DefaultValue");
             DefaultValue.Name = name;
-            MongoExamples.ReplaceByName(name, DefaultValue);
+            ReplaceByName(name, DefaultValue);
         }
     }
 }
