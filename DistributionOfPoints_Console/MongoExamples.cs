@@ -5,7 +5,6 @@ namespace DistributionOfPoints_Console
 {
     public class MongoExamples
     {
-
         public static Unit Find(string name)
         {
             var client = new MongoClient();
@@ -15,7 +14,7 @@ namespace DistributionOfPoints_Console
             return document;
         }
 
-        public static void ReplaceByName(string name, Unit unit)
+        public static void SaveValues(string name, Unit unit)
         {
             var client = new MongoClient();
             var database = client.GetDatabase("DB");
@@ -27,7 +26,7 @@ namespace DistributionOfPoints_Console
         {
             Unit DefaultValue = Find(name + "DefaultValue");
             DefaultValue.Name = name;
-            ReplaceByName(name, DefaultValue);
+            SaveValues(name, DefaultValue);
         }
     }
 }
