@@ -7,10 +7,9 @@ namespace DistributionOfPoints_Console
 {
     internal class Program
     {
-        static void Main(string[] args)
+        public static void Main()
         {
-            Unit rogue = MongoExamples.Find("Rogue");
-            MongoExamples.ResetValues(rogue.Name);
+            MongoExamples.SaveValues("WizardDefaultValue", MongoExamples.Find("Wizard"));
         }
     }
 }

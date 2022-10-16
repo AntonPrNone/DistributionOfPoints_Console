@@ -1,8 +1,4 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.Bson;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 
 namespace DistributionOfPoints_Console
@@ -10,79 +6,79 @@ namespace DistributionOfPoints_Console
     [BsonIgnoreExtraElements]
     public class Unit : IUnit
     {
-        // indicators
+        // Indicators
         public string Name { get; internal set; }
 
-        public int skillPoints { get; private set; }
-        public int skillPointsMax { get; private set; }
-        public double maxHP { get; private set; }
-        public double maxMP { get; private set; }
+        public int SkillPoints { get; private set; }
+        public int SkillPointsMax { get; private set; }
+        public double MaxHP { get; private set; }
+        public double MaxMP { get; private set; }
         public double PAttack { get; private set; }
         public double MAttack { get; private set; }
         public double PDef { get; private set; }
 
-        // specifications
-        public int[] strength { get; private set; }  // minimum level; actual level; maximum level
-        public int[] dexterity { get; private set; }
-        public int[] constitution { get; private set; }
-        public int[] intelligence { get; private set; }
+        // Specifications
+        public int[] Strength { get; private set; }  // minimum level; actual level; maximum level
+        public int[] Dexterity { get; private set; }
+        public int[] Constitution { get; private set; }
+        public int[] Intelligence { get; private set; }
 
         public Unit(string Name, int skillPoints, int skillPointsMax, double maxHP, double maxMP, double PAttack, double MAttack,
                     double PDef, int[] strength, int[] dexterity, int[] constitution, int[] intelligence) // Manual creation
         {
             this.Name = Name;
-            this.skillPoints = skillPoints;
-            this.skillPointsMax = skillPointsMax;
-            this.maxHP = maxHP;
-            this.maxMP = maxMP;
+            this.SkillPoints = skillPoints;
+            this.SkillPointsMax = skillPointsMax;
+            this.MaxHP = maxHP;
+            this.MaxMP = maxMP;
             this.PAttack = PAttack;
             this.MAttack = MAttack;
             this.PDef = PDef;
 
-            this.strength = strength;
-            this.dexterity = dexterity;
-            this.constitution = constitution;
-            this.intelligence = intelligence;
+            this.Strength = strength;
+            this.Dexterity = dexterity;
+            this.Constitution = constitution;
+            this.Intelligence = intelligence;
         }
 
         // ---------------------------------------------------- WARRIOR ----------------------------------------------------
 
         public void ManagementStrengthWarrior(char sign)
         {
-            if (sign == '+' && (strength[1] < strength[2] && skillPoints > 0))
+            if (sign == '+' && (Strength[1] < Strength[2] && SkillPoints > 0))
             {
-                skillPoints--;
-                strength[1]++;
+                SkillPoints--;
+                Strength[1]++;
 
                 PAttack += 5;
-                maxHP += 2;
+                MaxHP += 2;
             }
 
-            else if (sign == '-' && (strength[0] < strength[1] && skillPoints < skillPointsMax))
+            else if (sign == '-' && (Strength[0] < Strength[1] && SkillPoints < SkillPointsMax))
             {
-                skillPoints++;
-                strength[1]--;
+                SkillPoints++;
+                Strength[1]--;
 
                 PAttack -= 5;
-                maxHP -= 2;
+                MaxHP -= 2;
             }
         }
 
         public void ManagementDexterityWarrior(char sign)
         {
-            if (sign == '+' && (dexterity[1] < dexterity[2] && skillPoints > 0))
+            if (sign == '+' && (Dexterity[1] < Dexterity[2] && SkillPoints > 0))
             {
-                skillPoints--;
-                dexterity[1]++;
+                SkillPoints--;
+                Dexterity[1]++;
 
                 PAttack++;
                 PDef++;
             }
 
-            else if (sign == '-' && (dexterity[0] < dexterity[1] && skillPoints < skillPointsMax))
+            else if (sign == '-' && (Dexterity[0] < Dexterity[1] && SkillPoints < SkillPointsMax))
             {
-                skillPoints++;
-                dexterity[1]--;
+                SkillPoints++;
+                Dexterity[1]--;
 
                 PAttack--;
                 PDef--;
@@ -91,42 +87,42 @@ namespace DistributionOfPoints_Console
 
         public void ManagementConstitutionWarrior(char sign)
         {
-            if (sign == '+' && (constitution[1] < constitution[2] && skillPoints > 0))
+            if (sign == '+' && (Constitution[1] < Constitution[2] && SkillPoints > 0))
             {
-                skillPoints--;
-                constitution[1]++;
+                SkillPoints--;
+                Constitution[1]++;
 
-                maxHP += 10;
+                MaxHP += 10;
                 PDef += 2;
             }
 
-            else if (sign == '-' && (constitution[0] < constitution[1] && skillPoints < skillPointsMax))
+            else if (sign == '-' && (Constitution[0] < Constitution[1] && SkillPoints < SkillPointsMax))
             {
-                skillPoints++;
-                constitution[1]--;
+                SkillPoints++;
+                Constitution[1]--;
 
-                maxHP -= 10;
+                MaxHP -= 10;
                 PDef -= 2;
             }
         }
 
         public void ManagementIntelligenceWarrior(char sign)
         {
-            if (sign == '+' && (intelligence[1] < intelligence[2] && skillPoints > 0))
+            if (sign == '+' && (Intelligence[1] < Intelligence[2] && SkillPoints > 0))
             {
-                skillPoints--;
-                intelligence[1]++;
+                SkillPoints--;
+                Intelligence[1]++;
 
-                maxMP++;
+                MaxMP++;
                 MAttack++;
             }
 
-            else if (sign == '-' && (intelligence[0] < intelligence[1] && skillPoints < skillPointsMax))
+            else if (sign == '-' && (Intelligence[0] < Intelligence[1] && SkillPoints < SkillPointsMax))
             {
-                skillPoints++;
-                intelligence[1]--;
+                SkillPoints++;
+                Intelligence[1]--;
 
-                maxMP--;
+                MaxMP--;
                 MAttack--;
             }
         }
@@ -135,40 +131,40 @@ namespace DistributionOfPoints_Console
 
         public void ManagementStrengthRogue(char sign)
         {
-            if (sign == '+' && (strength[1] < strength[2] && skillPoints > 0))
+            if (sign == '+' && (Strength[1] < Strength[2] && SkillPoints > 0))
             {
-                skillPoints--;
-                strength[1]++;
+                SkillPoints--;
+                Strength[1]++;
 
                 PAttack += 2;
-                maxHP++;
+                MaxHP++;
             }
 
-            else if (sign == '-' && (strength[0] < strength[1] && skillPoints < skillPointsMax))
+            else if (sign == '-' && (Strength[0] < Strength[1] && SkillPoints < SkillPointsMax))
             {
-                skillPoints++;
-                strength[1]--;
+                SkillPoints++;
+                Strength[1]--;
 
                 PAttack -= 2;
-                maxHP--;
+                MaxHP--;
             }
         }
 
         public void ManagementDexterityRogue(char sign)
         {
-            if (sign == '+' && (dexterity[1] < dexterity[2] && skillPoints > 0))
+            if (sign == '+' && (Dexterity[1] < Dexterity[2] && SkillPoints > 0))
             {
-                skillPoints--;
-                dexterity[1]++;
+                SkillPoints--;
+                Dexterity[1]++;
 
                 PAttack += 4;
                 PDef += 1.5;
             }
 
-            else if (sign == '-' && (dexterity[0] < dexterity[1] && skillPoints < skillPointsMax))
+            else if (sign == '-' && (Dexterity[0] < Dexterity[1] && SkillPoints < SkillPointsMax))
             {
-                skillPoints++;
-                dexterity[1]--;
+                SkillPoints++;
+                Dexterity[1]--;
 
                 PAttack -= 4;
                 PDef -= 1.5;
@@ -177,40 +173,40 @@ namespace DistributionOfPoints_Console
 
         public void ManagementConstitutionRogue(char sign)
         {
-            if (sign == '+' && (constitution[1] < constitution[2] && skillPoints > 0))
+            if (sign == '+' && (Constitution[1] < Constitution[2] && SkillPoints > 0))
             {
-                skillPoints--;
-                constitution[1]++;
+                SkillPoints--;
+                Constitution[1]++;
 
-                maxHP += 6;
+                MaxHP += 6;
             }
 
-            else if (sign == '-' && (constitution[0] < constitution[1] && skillPoints < skillPointsMax))
+            else if (sign == '-' && (Constitution[0] < Constitution[1] && SkillPoints < SkillPointsMax))
             {
-                skillPoints++;
-                constitution[1]--;
+                SkillPoints++;
+                Constitution[1]--;
 
-                maxHP -= 6;
+                MaxHP -= 6;
             }
         }
 
         public void ManagementIntelligenceRogue(char sign)
         {
-            if (sign == '+' && (intelligence[1] < intelligence[2] && skillPoints > 0))
+            if (sign == '+' && (Intelligence[1] < Intelligence[2] && SkillPoints > 0))
             {
-                skillPoints--;
-                intelligence[1]++;
+                SkillPoints--;
+                Intelligence[1]++;
 
-                maxMP += 1.5;
+                MaxMP += 1.5;
                 MAttack += 2;
             }
 
-            else if (sign == '-' && (intelligence[0] < intelligence[1] && skillPoints < skillPointsMax))
+            else if (sign == '-' && (Intelligence[0] < Intelligence[1] && SkillPoints < SkillPointsMax))
             {
-                skillPoints++;
-                intelligence[1]--;
+                SkillPoints++;
+                Intelligence[1]--;
 
-                maxMP -= 1.5;
+                MaxMP -= 1.5;
                 MAttack -= 2;
             }
         }
@@ -219,39 +215,39 @@ namespace DistributionOfPoints_Console
 
         public void ManagementStrengthWizard(char sign)
         {
-            if (sign == '+' && (strength[1] < strength[2] && skillPoints > 0))
+            if (sign == '+' && (Strength[1] < Strength[2] && SkillPoints > 0))
             {
-                skillPoints--;
-                strength[1]++;
+                SkillPoints--;
+                Strength[1]++;
 
                 PAttack += 3;
-                maxHP++;
+                MaxHP++;
             }
 
-            else if (sign == '-' && (strength[0] < strength[1] && skillPoints < skillPointsMax))
+            else if (sign == '-' && (Strength[0] < Strength[1] && SkillPoints < SkillPointsMax))
             {
-                skillPoints++;
-                strength[1]--;
+                SkillPoints++;
+                Strength[1]--;
 
                 PAttack -= 3;
-                maxHP--;
+                MaxHP--;
             }
         }
 
         public void ManagementDexterityWizard(char sign)
         {
-            if (sign == '+' && (dexterity[1] < dexterity[2] && skillPoints > 0))
+            if (sign == '+' && (Dexterity[1] < Dexterity[2] && SkillPoints > 0))
             {
-                skillPoints--;
-                dexterity[1]++;
+                SkillPoints--;
+                Dexterity[1]++;
 
                 PDef += 0.5;
             }
 
-            else if (sign == '-' && (dexterity[0] < dexterity[1] && skillPoints < skillPointsMax))
+            else if (sign == '-' && (Dexterity[0] < Dexterity[1] && SkillPoints < SkillPointsMax))
             {
-                skillPoints++;
-                dexterity[1]--;
+                SkillPoints++;
+                Dexterity[1]--;
 
                 PDef -= 0.5;
             }
@@ -259,42 +255,42 @@ namespace DistributionOfPoints_Console
 
         public void ManagementConstitutionWizard(char sign)
         {
-            if (sign == '+' && (constitution[1] < constitution[2] && skillPoints > 0))
+            if (sign == '+' && (Constitution[1] < Constitution[2] && SkillPoints > 0))
             {
-                skillPoints--;
-                constitution[1]++;
+                SkillPoints--;
+                Constitution[1]++;
 
-                maxHP += 3;
+                MaxHP += 3;
                 PDef++;
             }
 
-            else if (sign == '-' && (constitution[0] < constitution[1] && skillPoints < skillPointsMax))
+            else if (sign == '-' && (Constitution[0] < Constitution[1] && SkillPoints < SkillPointsMax))
             {
-                skillPoints++;
-                constitution[1]--;
+                SkillPoints++;
+                Constitution[1]--;
 
-                maxHP -= 3;
+                MaxHP -= 3;
                 PDef--;
             }
         }
 
         public void ManagementIntelligenceWizard(char sign)
         {
-            if (sign == '+' && (intelligence[1] < intelligence[2] && skillPoints > 0))
+            if (sign == '+' && (Intelligence[1] < Intelligence[2] && SkillPoints > 0))
             {
-                skillPoints--;
-                intelligence[1]++;
+                SkillPoints--;
+                Intelligence[1]++;
 
-                maxMP += 2;
+                MaxMP += 2;
                 MAttack += 5;
             }
 
-            else if (sign == '-' && (intelligence[0] < intelligence[1] && skillPoints < skillPointsMax))
+            else if (sign == '-' && (Intelligence[0] < Intelligence[1] && SkillPoints < SkillPointsMax))
             {
-                skillPoints++;
-                intelligence[1]--;
+                SkillPoints++;
+                Intelligence[1]--;
 
-                maxMP -= 2;
+                MaxMP -= 2;
                 MAttack -= 5;
             }
         }
